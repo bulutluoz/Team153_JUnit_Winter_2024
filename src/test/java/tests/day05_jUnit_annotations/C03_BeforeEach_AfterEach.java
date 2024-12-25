@@ -1,33 +1,43 @@
 package tests.day05_jUnit_annotations;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.time.Duration;
 
-public class C02_OrtakIslemleriMethodlastirma {
+public class C03_BeforeEach_AfterEach {
+
     /*
-        5- Java OOP consept ayni kodlari tekrar tekrar yazmak yerine
-           method'lastirmamizi tavsiye eder
-           Biz de baslangictaki driver edinme adimlarini
-           ve sondaki kapatmayi ayri bir method olarak kullanabiliriz
+        6- driver olusturmak icin kullandigimiz setup() ve
+           driver'i kapatmak icin kullandigimiz teardown() method'lari
+           bagimsiz calismasi gereken method'lar degil
+           @Test method'undan once ve sonra calismasi gereken ozel method'lardir
+
+        7- Eger setup() her @Test method'undan once calismasini isterseniz
+           @BeforeEach kullanabilirsiniz
+           Ayni sekilde teardown() her @Test method'undan sonra
+           otomatik olarak calismasini isterseniz @AfterEach kullanabilirsiniz
      */
+
     WebDriver driver;
 
+    @BeforeEach
     public void setup(){
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
+    @AfterEach
     public void teardown(){
         driver.quit();
     }
 
     @Test
     public void testotomasyonuTesti() throws InterruptedException {
-        setup();
         // 1- testotomasyonu sayfasina gidin
         driver.get("https://www.testotomasyonu.com");
 
@@ -40,12 +50,10 @@ public class C02_OrtakIslemleriMethodlastirma {
         } else System.out.println("Testotomasyonu Testi FAILED");
 
         Thread.sleep(1000);
-        teardown();
     }
 
     @Test
     public void youtubeTesti() throws InterruptedException {
-        setup();
         // 2- youtube ana sayfaya gidin ve
         driver.get("https://www.youtube.com");
 
@@ -59,12 +67,10 @@ public class C02_OrtakIslemleriMethodlastirma {
         } else System.out.println("Youtube testi FAILED");
 
         Thread.sleep(1000);
-        teardown();
     }
 
     @Test
     public void wisequarterTesti() throws InterruptedException {
-        setup();
         // 3- wisequarter anasayfaya gidin ve
         driver.get("https://www.wisequarter.com");
 
@@ -78,6 +84,5 @@ public class C02_OrtakIslemleriMethodlastirma {
         } else System.out.println("Wisequarter testi FAILED");
 
         Thread.sleep(1000);
-        teardown();
     }
 }
