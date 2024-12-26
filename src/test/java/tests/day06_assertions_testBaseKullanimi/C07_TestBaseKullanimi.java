@@ -1,47 +1,36 @@
 package tests.day06_assertions_testBaseKullanimi;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import utilities.TestBase_Each;
 
-import java.time.Duration;
 import java.util.List;
 
-public class C06_BeforeAfterKullanmak {
+public class C07_TestBaseKullanimi extends TestBase_Each {
 
     // testotomasyonu anasayfaya gidin
     // phone icin arama yapin
     // arama sonucunda urun bulunabildigini test edin
 
     /*
-        @Test method'unda assertion failed olursa
-        kod calismasi durur
+        Bir test class'i olusturdugumuzda
+        ilk yapmamiz gereken sey
+        WebDriver objesi edinmektir
 
-        Eger driver'in kapatilmasi
-        @Test method'u icerisinde olursa
-        FAILED durumlarinda browser kapanmaz
-
-        bu da istenen bir durum degildir
+        Her class'da WebDriver objesi olusturmak
+        ve gerekli ayarlari yapmak,
+        driver'in kapanmasi icin teardown method'u olusturmak yerine
+        OOP kullanarak 1 kere olusturup
+        gerektigi yerden kullanmak daha mantikli olacaktir
      */
-    WebDriver driver;
-
-    @AfterEach
-    public void teardown(){
-        driver.quit();
-    }
 
     @Test
     public void aramaTesti(){
 
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
+        // testotomasyonu anasayfaya gidin
         driver.get("https://www.testotomasyonu.com");
 
         // 2- phone icin arama yapip,
@@ -55,10 +44,9 @@ public class C06_BeforeAfterKullanmak {
 
         int actualSonucSayisi = bulunanUrunElementleriList.size();
 
-        Assertions.assertTrue(actualSonucSayisi>10);
-
-        //driver.quit();
-
+        Assertions.assertTrue(actualSonucSayisi>0);
 
     }
+
+
 }
