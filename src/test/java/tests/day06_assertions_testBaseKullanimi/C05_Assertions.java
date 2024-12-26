@@ -47,7 +47,12 @@ public class C05_Assertions {
         //	d. Seker ve Epilepsi checkbox’larininin seçili
         //     olmadigini test edin
 
+        WebElement sekerCheckbox= driver.findElement(By.id("hastalikCheck2"));
+        WebElement epilepsiCheckbox= driver.findElement(By.id("hastalikCheck7"));
 
+        Assertions.assertFalse(sekerCheckbox.isSelected());
+        Assertions.assertFalse(epilepsiCheckbox.isSelected());
+        Thread.sleep(2000);
         driver.quit();
 
     }
