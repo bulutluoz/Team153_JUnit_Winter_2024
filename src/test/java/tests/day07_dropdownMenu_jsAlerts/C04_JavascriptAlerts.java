@@ -67,10 +67,27 @@ public class C04_JavascriptAlerts extends TestBase_Each {
     public void alertPromptTesti(){
         //3.Test
         //	- https://testotomasyonu.com/javascriptAlert adresine gidin
+        driver.get("https://testotomasyonu.com/javascriptAlert");
+
         //	- 3.alert'e tiklayalim
-        //	- Cikan prompt ekranina "Abdullah" yazdiralim
+        driver.findElement(By.xpath("//button[.='Click for JS Prompt']"))
+                .click();
+
+        //	- Cikan prompt ekranina "Yusuf" yazdiralim
+        driver.switchTo().alert().sendKeys("Yusuf");
+
+
         //	- OK tusuna basarak alert'i kapatalim
-        //	- Cikan sonuc yazisinin Abdullah icerdigini test edelim
+        driver.switchTo().alert().accept();
+
+        //	- Cikan sonuc yazisinin Yusuf icerdigini test edelim
+
+        String expectedSonucIcerik ="Yusuf";
+
+        String actualSonucYazisi = driver.findElement(By.id("result"))
+                                            .getText();
+
+        Assertions.assertTrue(actualSonucYazisi.contains(expectedSonucIcerik));
     }
 
 }
