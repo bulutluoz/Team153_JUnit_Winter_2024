@@ -1,5 +1,6 @@
 package tests.day07_dropdownMenu_jsAlerts;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -7,6 +8,7 @@ import org.openqa.selenium.support.ui.Select;
 import utilities.ReusableMethods;
 import utilities.TestBase_Each;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class C01_DropdownMenu extends TestBase_Each {
@@ -82,10 +84,43 @@ public class C01_DropdownMenu extends TestBase_Each {
 
         // ay dropdown menusunde mart kelimesinin gecmedigini test edin
 
+            // 1.alternatif, bir flag olusturup for each loop ile mart kelimesi var mi bakalim
+
+        boolean martVarMi = false;
+
+        for (WebElement each: ayDdmOptionElementleriList){
+
+            if (each.getText().equals("mart")){
+                martVarMi = true;
+            }
+
+        }
+
+        Assertions.assertFalse(martVarMi);
+
+            // 2.alternatif elimizdeki WebElement'lerden olusan listeyi
+            //              (ayDdmOptionElementleriList) String'lerden olusan bir listeye cevirip
+            //              bu listenin mart icermedigini test edebiliriz
+
+        List<String> ddmOptionsStringList = new ArrayList<>();
+
+        for (WebElement each: ayDdmOptionElementleriList){
+
+            ddmOptionsStringList.add(each.getText());
+        }
+
+        System.out.println("String liste : " + ddmOptionsStringList);
+
+        Assertions.assertFalse(ddmOptionsStringList.contains("mart"));
 
 
 
         //	6. Ay Dropdown menusunun boyutunun 13 olduğunu test edin
+
+        int expectedDdmBoyutu = 13;
+        int actualDdmBoyutu = ayDdmOptionElementleriList.size();
+
+        Assertions.assertEquals(expectedDdmBoyutu,actualDdmBoyutu);
 
         ReusableMethods.bekle(3);
 
