@@ -34,10 +34,37 @@ public class C02_IFrame extends TestBase_Each {
         Assertions.assertEquals(expectedYazi,dellPC.getText());
 
         //4- ‘Here are some products’ yazisinin gorunur olduğunu test edin
-        //5- ‘Fashion’ yazisinin gorunur olduğunu test edin
-        //6- Fashion bolumundeki ilk urunu tiklayin
-        //   ve ilk urun isminde "Men Slim Fit" gectigini test edin
 
-        ReusableMethods.bekle(3);
+        // driver'i bir iFrame'e gecis yaptirdigimizda
+        // biz tekrar driver'i anasayfaya dondurmedikce
+        // driver iframe'de kalir
+
+        //driver.switchTo().parentFrame(); // ic ice iframe'ler varsa bir ust iframe'e cikar
+        driver.switchTo().defaultContent(); // ic ice iframe'ler varsa anasayfaya doner
+
+
+        WebElement hereAreYaziElementi = driver.findElement(By.xpath("//*[.='Here are some products.']"));
+
+        Assertions.assertTrue(hereAreYaziElementi.isDisplayed());
+
+
+        //5- ‘Fashion’ yazisinin gorunur olduğunu test edin
+
+        // once fashion iFrame'e gecis yapalim
+        WebElement fashionIFrame = driver.findElement(By.xpath("(//iframe)[2]"));
+        driver.switchTo().frame(fashionIFrame);
+
+        WebElement fashionYaziElementi = driver.findElement(By.xpath("//*[.='Fashion']"));
+        Assertions.assertTrue(fashionYaziElementi.isDisplayed());
+
+        //6- Fashion bolumundeki ilk urun isminde "Men Slim Fit" gectigini test edin
+        WebElement fashionIlkUrun = driver.findElement(By.id("men-slim-shirt"));
+
+        String expectedIsimIcerik = "Men Slim Fit";
+        String actualUrunIsmi = fashionIlkUrun.getText();
+
+        Assertions.assertTrue(actualUrunIsmi.contains(expectedIsimIcerik));
+
+        ReusableMethods.bekle(1);
     }
 }
