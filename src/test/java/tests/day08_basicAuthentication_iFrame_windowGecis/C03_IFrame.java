@@ -1,4 +1,4 @@
-package tests.day08_basicAuthentication_iFrame;
+package tests.day08_basicAuthentication_iFrame_windowGecis;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
