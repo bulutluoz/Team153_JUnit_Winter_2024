@@ -67,6 +67,13 @@ public class C02_KontrolsuzAcilanWindowGecisleri extends TestBase_Each {
         // 4- yeniWindowWhd'ini kullanarak yeni window'a gecin
         driver.switchTo().window(yeniWindowWhd);
         ReusableMethods.bekle(2);
+        //● Acilan yeni pencerenin sayfa başlığının (title) “New Window” oldugunu test edin
+
+        expectedTitle = "New Window";
+        actualTitle = driver.getTitle();
+
+        Assertions.assertEquals(expectedTitle,actualTitle);
+
 
         //● Sayfadaki textin “New Window” olduğunu doğrulayın.
 
