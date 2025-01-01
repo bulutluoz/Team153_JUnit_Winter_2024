@@ -55,6 +55,8 @@ public class C06_KontrolsuzAcilanWindow extends TestBase_Each {
         // acik olan tum window'larin window handle degerlerini yazdirin
         System.out.println("Tum window'lari whd'leri : " + driver.getWindowHandles());
 
+        ReusableMethods.bekle(20);
+
 
     }
 }
