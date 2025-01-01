@@ -31,10 +31,8 @@ public class C04_UrlIleWindowGecis extends TestBase_Each {
         Assertions.assertTrue(actualTitle.contains(expectedTitleIcerik));
 
         //● ’Please click for Electronics Products’ linkine tiklayin.
-        driver.findElement(By.xpath("[.='Electronics Products']"))
+        driver.findElement(By.xpath("//*[.='Electronics Products']"))
                 .click();
-
-
 
         // once yeni window'a gecis yapmaliyiz
         String hedefWindowUrl = "https://testotomasyonu.com/category/7/products";
