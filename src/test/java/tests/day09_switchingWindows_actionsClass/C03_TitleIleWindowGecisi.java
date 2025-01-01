@@ -6,7 +6,7 @@ import org.openqa.selenium.By;
 import utilities.ReusableMethods;
 import utilities.TestBase_Each;
 
-public class C02_TitleIleWindowGecisi extends TestBase_Each {
+public class C03_TitleIleWindowGecisi extends TestBase_Each {
 
     @Test
     public void test01(){
