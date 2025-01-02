@@ -35,10 +35,11 @@ public class C06_FileExistTesti {
         Assertions.assertTrue(Files.exists(Paths.get(dosyaYolu)));
 
 
-
-
         // deneme.txt dosyasini downloads klasorune kopyalayin
         // ve downloads klasorunde deneme.txt dosyasinin varoldugunu test edin
 
+        String dowloadsDosyayolu= "/Users/ahmetbulutluoz/Downloads/deneme.txt";
+
+        Assertions.assertTrue(   Files.exists(Paths.get(dowloadsDosyayolu))    );
     }
 }
