@@ -19,10 +19,10 @@ public class C05_ContextClick extends TestBase_Each {
         WebElement dgiDronesElemmenti = driver.findElement(By.id("pic2_thumb"));
 
         Actions actions = new Actions(driver);
-        ReusableMethods.bekle(1);
+        //ReusableMethods.bekle(1);
 
         actions.contextClick(dgiDronesElemmenti).perform();
-        ReusableMethods.bekle(2);
+        ReusableMethods.bekle(20);
 
         //3- Alert’te cikan yazinin “Tebrikler!... Sağ click yaptınız.” oldugunu test edin.
         String expectedAlertYazi = "Tebrikler!... Sağ click yaptınız.";
