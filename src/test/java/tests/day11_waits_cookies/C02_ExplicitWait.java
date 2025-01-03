@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -75,14 +76,27 @@ public class C02_ExplicitWait {
         //        Eger boyle bir durumla karsilasirsaniz 2. ve 3. adimlari birlikte yapabiliriz
         //3.adim: wait objesine hangi islem icin bekleyecegini tanimlayin
 
+        WebElement itsGoneYaziElementi =
+                wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("message")));
 
-
-
-
-
+        Assertions.assertTrue(itsGoneYaziElementi.isDisplayed());
 
         //4. Add buttonuna basin
+        driver.findElement(By.xpath("//*[.='Add']"))
+                .click();
+
+
         //5. It’s back mesajinin gorundugunu test edin
+
+        //1.adim wait objesi yukarda olusturuldu
+
+        // elementin gorunur olmasi ve locate edebilmemiz icin oncelikle beklememiz gerekiyor
+        // 2. ve 3. adimi birlikte yapalim (locate ve bekleme)
+
+        WebElement itsBackYaziElementi =
+                wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("message")));
+
+        Assertions.assertTrue(itsBackYaziElementi.isDisplayed());
 
         driver.quit();
     }
