@@ -60,13 +60,64 @@ public class C01_Cookies extends TestBase_Each {
         System.out.println("=================");
         cookiesSeti = driver.manage().getCookies();
 
+        siraNo = 1;
+
+        for (Cookie eachCookie : cookiesSeti){
+            System.out.println(siraNo+". cookie : \n" + eachCookie);
+            siraNo++;
+        }
 
 
+        // cookie'nin eklendigini test etmek icin
 
+        boolean benimCookieEklendiMi = false;
 
+        for (Cookie eachCookie : cookiesSeti){
+
+            if (eachCookie.getName().equals("en sevdigim cookie")){
+                benimCookieEklendiMi = true;
+                break;
+            }
+
+        }
+
+        Assertions.assertTrue(benimCookieEklendiMi);
 
         //8- ismi SOCS olan cookie’yi silin ve silindigini test edin
+
+        driver.manage().deleteCookieNamed("SOCS");
+
+        System.out.println("=================");
+        cookiesSeti = driver.manage().getCookies();
+
+        siraNo = 1;
+
+        for (Cookie eachCookie : cookiesSeti){
+            System.out.println(siraNo+". cookie : \n" + eachCookie);
+            siraNo++;
+        }
+
+        boolean socsCookieVarMi = false;
+
+        for (Cookie eachCookie : cookiesSeti){
+
+            if (eachCookie.getName().equals("SOCS")){
+                socsCookieVarMi = true;
+                break;
+            }
+
+        }
+
+        Assertions.assertFalse(socsCookieVarMi);
+
         //9- tum cookie’leri silin ve silindigini test edin
+
+        driver.manage().deleteAllCookies();
+
+        cookiesSeti = driver.manage().getCookies();
+
+        Assertions.assertEquals(cookiesSeti.size() , 0);
+
 
         ReusableMethods.bekle(2);
 
