@@ -47,7 +47,6 @@ public class C02_ExplicitWait {
     }
 
 
-
     @Test
     public void explicitlyWaitTesti(){
         driver = new ChromeDriver();
