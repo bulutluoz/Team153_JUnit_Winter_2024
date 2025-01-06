@@ -95,8 +95,33 @@ public class C02_KlasikTabloTaglariIleWebtable extends TestBase_Each {
         System.out.println(ReusableMethods.stringListeDonustur(baslikDataElementleriList));
 
 
-        //9. Satir ve sutunu parametre olarak alip, hucredeki bilgiyi döndüren bir method olusturun
+        //9. Satir ve sutunu parametre olarak alip,
+        //   hucredeki bilgiyi String olarak döndüren bir method olusturun
+
+        System.out.println(getCellData(1, 2)); // Electronics
+        System.out.println(getCellData(2,3)); // $40.00
+        System.out.println(getCellData(3,2)); // Travel
+
         //10. 4.satirdaki category degerinin "Furniture" oldugunu test edin
 
+        String expectedDeger= "Furniture";
+        String actualDeger = getCellData(4,2);
+
+        Assertions.assertEquals(expectedDeger,actualDeger);
+
     }
+
+
+    public String getCellData( int satirNo , int sutunNo ){
+
+        //            //tbody/tr[     3      ]/td[      4      ]
+
+        String dinamikXpath = "//tbody/tr[" + satirNo + "]/td[" + sutunNo + "]";
+
+        WebElement hedefCellElementi = driver.findElement(By.xpath(dinamikXpath));
+
+        return hedefCellElementi.getText();
+
+    }
+
 }
