@@ -52,11 +52,37 @@ public class C03_KlasikOlmayanTaglarIleWebtable extends TestBase_Each {
 
         System.out.println("tablodaki sutun sayisi : " + birinciSatirDataElementleriList.size());//4
 
-
-
-
         //  8. Tablodaki 3.kolonu yazdirin
-        //  9. Tabloda " Category" si Furniture olan urunun fiyatini yazdirin
-        //10. Bir method olusturun, Test sayfasindan satir ve sutun verildiginde datayi yazdirsin
+
+        List<WebElement> ucuncuSutunElementleriList =
+                driver.findElements(By.xpath("//*[@role='trow'][*]/*[@role='tdata'][3]"));
+
+        System.out.println(ReusableMethods.stringListeDonustur(ucuncuSutunElementleriList));
+        // [$399.00, $399.00, $399.00, $40.00, $15.00]
+
+
+        //9. Bir method olusturun, Test sayfasindan satir ve sutun verildiginde datayi dondursun
+        System.out.println(getCellData(2, 3)); // $399.00
+
+
+        //10. Tabloda " Category" si Furniture olan urunun fiyatini yazdirin
+
+
+
+
+
+
+    }
+
+    public String getCellData(int satirNo, int sutunNo){
+
+        //        //*[@role='trow'][   4   ]/*[@role='tdata'][    1    ]
+
+        String dinamikXpath = "//*[@role='trow'][" + satirNo + "]/*[@role='tdata'][" + sutunNo + "]";
+
+        WebElement hedefElement = driver.findElement(By.xpath(dinamikXpath));
+
+        return hedefElement.getText();
+
     }
 }
