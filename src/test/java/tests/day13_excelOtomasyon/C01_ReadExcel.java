@@ -1,6 +1,7 @@
 package tests.day13_excelOtomasyon;
 
 import org.apache.poi.ss.usermodel.*;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileInputStream;
@@ -39,13 +40,83 @@ public class C01_ReadExcel {
 
         System.out.println(sayfa1.getRow(0).getCell(1)); // Başkent (İngilizce)
 
-
         //- 1.satirdaki 2.hucreyi bir string degiskene atayin
+
+        String actualData = sayfa1.getRow(0).getCell(1).getStringCellValue();
+
         //  	ve degerinin “Başkent (İngilizce)” oldugunu test edin
+
+        String expectedData = "Başkent (İngilizce)";
+
+        Assertions.assertEquals(expectedData,actualData);
+
         //- 2.satir 4.cell’in afganistan’in baskenti “Kabil” oldugunu test edin
+
+        expectedData = "Kabil";
+        actualData = sayfa1.getRow(1).getCell(3).getStringCellValue();
+
+        Assertions.assertEquals(expectedData,actualData);
+
         //- Ulke sayisinin 190 oldugunu test edin
+
+        int expectedUlkeSayisi = 190 ;
+        int actualUlkeSayisi = sayfa1.getLastRowNum() + 1 -1 ;
+
+        // getLastRowNum() kullanilan son satirin index'ini verir
+        // ulke sayisini bulurken index + 1 yapmamiz lazim
+        // ancak en basta baslik satiri oldugu icin
+        // kullanilan satir sayisindan 1 cikarmamiz gerekir
+
+        Assertions.assertEquals(expectedUlkeSayisi,actualUlkeSayisi);
+
         //- Fiziki olarak kullanilan satir sayisinin 191 oldugunu test edin
-        //- Ingilizce ismi Netherland olan ulkenin baskentinin turkce Amsterdam oldugunu test edin
+        int expectedKullanilanSatirSayisi = 191;
+        int actualKullanilanSatirSayisi = sayfa1.getPhysicalNumberOfRows();
+
+        Assertions.assertEquals(expectedKullanilanSatirSayisi,actualKullanilanSatirSayisi);
+
+        //- Ingilizce ismi Netherlands olan ulkenin baskentinin turkce Amsterdam oldugunu test edin
+
+        for (int i = 0; i <= sayfa1.getLastRowNum() ; i++) {
+
+            String satirdakiIngilizceUlkeIsmi = sayfa1
+                                                        .getRow(i)
+                                                        .getCell(0)
+                                                        .getStringCellValue();
+
+            if (satirdakiIngilizceUlkeIsmi.equals("Netherlands")){
+
+                String satirdakiTurkceBaskentIsmi = sayfa1.getRow(i)
+                                                            .getCell(3)
+                                                            .getStringCellValue();
+
+                Assertions.assertEquals(satirdakiTurkceBaskentIsmi,"Amsterdam");
+                break;
+            }
+        }
+
+
         //- Turkce baskent isimlerinde Ankara bulundugunu test edin
+
+        boolean ankaraVarMi = false;
+
+        for (int i = 0; i <= sayfa1.getLastRowNum() ; i++) {
+
+            String satirdakiTurkceBaskentIsmi = sayfa1.getRow(i)
+                                                        .getCell(3)
+                                                        .getStringCellValue();
+
+            if (satirdakiTurkceBaskentIsmi.equalsIgnoreCase("Ankara")){
+                ankaraVarMi = true;
+                break;
+            }
+
+        }
+
+        Assertions.assertTrue(ankaraVarMi);
+
+
+
+
     }
 }
