@@ -8,6 +8,8 @@ import org.openqa.selenium.WebElement;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -83,7 +85,9 @@ public class ReusableMethods {
 
     public static void tumSayfaScreenshot(WebDriver driver) {
         // dosya ismine eklemek icin tarih etiketi olusturalim
-
+        LocalDateTime ldt = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("_yyMMdd_HHmmss");
+        String tarihEtiketi = ldt.format(formatter);
 
 
         // 1.adim TakesScreenshot objesi olusturun ve deger olarak driver'i atayip cast edin
@@ -91,7 +95,7 @@ public class ReusableMethods {
 
         // 2.adim : ekran goruntusunu kaydedecegimiz File'i olusturun
         //          parametre olarak kaydetmek istediginiz dosyanin, dosya yolunu girin
-        File asilResim = new File("target/screenshots/tumSayfaScreenshot"+".jpg");
+        File asilResim = new File("target/screenshots/tumSayfaScreenshot"+tarihEtiketi+".jpg");
 
         // 3.adim : olusturdugumuz takeScreenshot objesi ile ekran goruntusunu alip
         //          gecici bir File'a kaydedelim
@@ -108,12 +112,17 @@ public class ReusableMethods {
     }
 
     public static void isimliTumSayfaScreenshot(WebDriver driver,String resimIsmi) {
+        // dosya ismine eklemek icin tarih etiketi olusturalim
+        LocalDateTime ldt = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("_yyMMdd_HHmmss");
+        String tarihEtiketi = ldt.format(formatter);
+
         // 1.adim TakesScreenshot objesi olusturun ve deger olarak driver'i atayip cast edin
         TakesScreenshot takesScreenshot = (TakesScreenshot) driver;
 
         // 2.adim : ekran goruntusunu kaydedecegimiz File'i olusturun
         //          parametre olarak kaydetmek istediginiz dosyanin, dosya yolunu girin
-        File asilResim = new File("target/screenshots/" + resimIsmi + ".jpg");
+        File asilResim = new File("target/screenshots/" + resimIsmi +tarihEtiketi+ ".jpg");
 
         // 3.adim : olusturdugumuz takeScreenshot objesi ile ekran goruntusunu alip
         //          gecici bir File'a kaydedelim
