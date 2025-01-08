@@ -138,4 +138,56 @@ public class ReusableMethods {
 
     }
 
+    public static void webElementScreenshot(WebElement hedefElement){
+        // dosya ismine eklemek icin tarih etiketi olusturalim
+        LocalDateTime ldt = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("_yyMMdd_HHmmss");
+        String tarihEtiketi = ldt.format(formatter);
+
+
+        // 1.adim : screenshot alinmasi istenen Webelement'i locate edip kaydedin
+        //          biz hedefElement'i parametre olarak aldik
+
+        // 2.adim : screenshot'in kaydedilecegi asil File'i olusturun
+        File asilResim = new File("target/screenshots/webelementScreenshot"+tarihEtiketi+".jpg");
+
+        // 3.adim : resmini cekmek istediginiz webElement uzerinden
+        //          getScreenshotAs() kullanin ve gecici dosyaya kaydedin
+        File geciciResim = hedefElement.getScreenshotAs(OutputType.FILE);
+
+        // 4.adim : FileUtils ile gecici dosyayi asilResim dosyasina kopyalayin
+
+        try {
+            FileUtils.copyFile(geciciResim,asilResim);
+        } catch (IOException e) {
+            System.out.println("Ekran resmi alinamadi");
+        }
+    }
+
+    public static void isimliWebElementScreenshot(WebElement hedefElement, String resimIsmi){
+        // dosya ismine eklemek icin tarih etiketi olusturalim
+        LocalDateTime ldt = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("_yyMMdd_HHmmss");
+        String tarihEtiketi = ldt.format(formatter);
+
+
+        // 1.adim : screenshot alinmasi istenen Webelement'i locate edip kaydedin
+        //          biz hedefElement'i parametre olarak aldik
+
+        // 2.adim : screenshot'in kaydedilecegi asil File'i olusturun
+        File asilResim = new File("target/screenshots/"+resimIsmi+tarihEtiketi+".jpg");
+
+        // 3.adim : resmini cekmek istediginiz webElement uzerinden
+        //          getScreenshotAs() kullanin ve gecici dosyaya kaydedin
+        File geciciResim = hedefElement.getScreenshotAs(OutputType.FILE);
+
+        // 4.adim : FileUtils ile gecici dosyayi asilResim dosyasina kopyalayin
+
+        try {
+            FileUtils.copyFile(geciciResim,asilResim);
+        } catch (IOException e) {
+            System.out.println("Ekran resmi alinamadi");
+        }
+    }
+
 }
