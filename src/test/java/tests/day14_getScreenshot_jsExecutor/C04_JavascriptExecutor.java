@@ -30,16 +30,16 @@ public class C04_JavascriptExecutor extends TestBase_Each {
 
         jse.executeScript("arguments[0].scrollIntoView({block: 'center'});",isitmeKaybiCheckbox);
 
-        ReusableMethods.bekle(10);
-        isitmeKaybiCheckbox.click();
-
+        ReusableMethods.bekle(1);
 
 
         // jse kullanarak isitme kaybi checkbox'i isaretleyin
-
+        jse.executeScript("arguments[0].click();",isitmeKaybiCheckbox);
 
 
         // javascript Alert kullanarak "JUnit BITTTIIIII" yazdirin
+        jse.executeScript("alert('JUnit BITTTIIIII');");
+
 
 
         ReusableMethods.bekle(4);
