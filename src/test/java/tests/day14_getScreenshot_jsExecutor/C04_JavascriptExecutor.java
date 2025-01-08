@@ -40,8 +40,6 @@ public class C04_JavascriptExecutor extends TestBase_Each {
         // javascript Alert kullanarak "JUnit BITTTIIIII" yazdirin
         jse.executeScript("alert('JUnit BITTTIIIII');");
 
-
-
         ReusableMethods.bekle(4);
 
     }
