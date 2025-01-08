@@ -37,7 +37,12 @@ public class C02_PozitifLoginTesti extends TestBase_Each {
         Assertions.assertTrue(logoutButonu.isDisplayed());
 
         // tum sayfa screenshot alin
+        ReusableMethods.bekle(1);
+
+        ReusableMethods.isimliTumSayfaScreenshot(driver,"pozitifLoginTesti");
         ReusableMethods.tumSayfaScreenshot(driver);
+
+
 
         // logout butonuna basarak cikis yapin
         logoutButonu.click();
