@@ -1,17 +1,19 @@
 package tests.day14_getScreenshot_jsExecutor;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import utilities.ReusableMethods;
 import utilities.TestBase_Each;
+
+import java.io.File;
+import java.io.IOException;
 
 public class C01_EkranGoruntusuKaydetme extends TestBase_Each {
 
     @Test
-    public void test01(){
+    public void test01() throws IOException {
 
         // 1- testotomasyonu anasayfaya gidip,
         driver.get("https://www.testotomasyonu.com");
@@ -55,7 +57,21 @@ public class C01_EkranGoruntusuKaydetme extends TestBase_Each {
         // testin sorunsuz calistigini ispatlamak icin
         // sayfanin screenshot'ini alip kaydedin
 
+        // 1.adim TakesScreenshot objesi olusturun ve deger olarak driver'i atayip cast edin
+        TakesScreenshot takesScreenshot = (TakesScreenshot) driver;
 
+        // 2.adim : ekran goruntusunu kaydedecegimiz File'i olusturun
+        //          parametre olarak kaydetmek istediginiz dosyanin, dosya yolunu girin
+        File asilResim = new File("target/screenshots/tumSayfaScreenshot.jpg");
+
+        // 3.adim : olusturdugumuz takeScreenshot objesi ile ekran goruntusunu alip
+        //          gecici bir File'a kaydedelim
+        File geciciResim = takesScreenshot.getScreenshotAs(OutputType.FILE);
+
+        // 4.adim : gecici dosyayi, asilResim dosyasina kopyalayin
+        FileUtils.copyFile(geciciResim,asilResim);
+
+        driver.quit();
 
     }
 }

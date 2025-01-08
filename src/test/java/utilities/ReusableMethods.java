@@ -1,8 +1,13 @@
 package utilities;
 
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -74,6 +79,28 @@ public class ReusableMethods {
             }
 
         }
+    }
+
+    public static void tumSayfaScreenshot(WebDriver driver) {
+        // 1.adim TakesScreenshot objesi olusturun ve deger olarak driver'i atayip cast edin
+        TakesScreenshot takesScreenshot = (TakesScreenshot) driver;
+
+        // 2.adim : ekran goruntusunu kaydedecegimiz File'i olusturun
+        //          parametre olarak kaydetmek istediginiz dosyanin, dosya yolunu girin
+        File asilResim = new File("target/screenshots/tumSayfaScreenshot.jpg");
+
+        // 3.adim : olusturdugumuz takeScreenshot objesi ile ekran goruntusunu alip
+        //          gecici bir File'a kaydedelim
+        File geciciResim = takesScreenshot.getScreenshotAs(OutputType.FILE);
+
+        // 4.adim : gecici dosyayi, asilResim dosyasina kopyalayin
+
+        try {
+            FileUtils.copyFile(geciciResim,asilResim);
+        } catch (IOException e) {
+            System.out.println("Ekran resmi alinamadi");
+        }
+
     }
 
 }
